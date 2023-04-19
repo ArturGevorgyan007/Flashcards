@@ -9,6 +9,8 @@ on:
       - DevBranch
   workflow_dispatch:
 
+env:
+  WORKING_DIR: BackEnd/API
 jobs:
   build:
     runs-on: windows-latest
@@ -23,10 +25,10 @@ jobs:
           include-prerelease: true
 
       - name: Build with dotnet
-        run: dotnet build --configuration Release
+        run: dotnet build ${{env.WORKING_DIR}} --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet publish ${{env.WORKING_DIR}} -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
