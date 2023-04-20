@@ -23,11 +23,11 @@ public partial class FlashcardsDbContext : DbContext
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Answer)
-                .HasMaxLength(1)
+                .HasMaxLength(1000)
                 .IsUnicode(false)
                 .HasColumnName("ANSWER");
             entity.Property(e => e.Question)
-                .HasMaxLength(1)
+                .HasMaxLength(1000)
                 .IsUnicode(false)
                 .HasColumnName("QUESTION");
         });

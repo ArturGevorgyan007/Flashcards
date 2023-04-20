@@ -1353,6 +1353,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
+          "Microsoft.EntityFrameworkCore": "7.0.5",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.5"
         },
         "compile": {
@@ -1360,6 +1361,19 @@
         },
         "runtime": {
           "bin/placeholder/DataAccess.dll": {}
+        }
+      },
+      "Services/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "DataAccess": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Services.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Services.dll": {}
         }
       }
     }
@@ -4166,6 +4180,11 @@
       "type": "project",
       "path": "../DataAccess/DataAccess.csproj",
       "msbuildProject": "../DataAccess/DataAccess.csproj"
+    },
+    "Services/1.0.0": {
+      "type": "project",
+      "path": "../Services/Services.csproj",
+      "msbuildProject": "../Services/Services.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -4173,7 +4192,9 @@
       "DataAccess >= 1.0.0",
       "Microsoft.AspNetCore.OpenApi >= 7.0.2",
       "Microsoft.EntityFrameworkCore.Design >= 7.0.5",
+      "Microsoft.EntityFrameworkCore.SqlServer >= 7.0.5",
       "Microsoft.Extensions.Configuration.Json >= 7.0.0",
+      "Services >= 1.0.0",
       "Swashbuckle.AspNetCore >= 6.4.0"
     ]
   },
@@ -4204,6 +4225,9 @@
           "projectReferences": {
             "C:\\Revature\\ArturGevorgyan007\\Flashcards\\BackEnd\\DataAccess\\DataAccess.csproj": {
               "projectPath": "C:\\Revature\\ArturGevorgyan007\\Flashcards\\BackEnd\\DataAccess\\DataAccess.csproj"
+            },
+            "C:\\Revature\\ArturGevorgyan007\\Flashcards\\BackEnd\\Services\\Services.csproj": {
+              "projectPath": "C:\\Revature\\ArturGevorgyan007\\Flashcards\\BackEnd\\Services\\Services.csproj"
             }
           }
         }
@@ -4225,6 +4249,10 @@
           "Microsoft.EntityFrameworkCore.Design": {
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
             "suppressParent": "All",
+            "target": "Package",
+            "version": "[7.0.5, )"
+          },
+          "Microsoft.EntityFrameworkCore.SqlServer": {
             "target": "Package",
             "version": "[7.0.5, )"
           },
