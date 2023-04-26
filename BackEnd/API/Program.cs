@@ -3,6 +3,18 @@ using DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+var  MyAllowSpecificOrigins = "*";
+
+builder.Services.AddCors(options =>  
+{  
+    options.AddPolicy(name: MyAllowSpecificOrigins,  
+        policy  =>  
+        {  
+            policy.WithOrigins(MyAllowSpecificOrigins)
+            .AllowAnyHeader()
+            .AllowAnyMethod(); // add the allowed origins  
+        });  
+}); 
 
 // Add services to the container.
 builder.Services.AddScoped<FlashCardServices>();

@@ -43,4 +43,13 @@ public class FlashCardServices {
     {
         return _context.Flashcards.FirstOrDefault(w => w.Id == id)!;
     }
+
+    public Flashcard GetId(string question)
+    {
+        var res = _context.Flashcards.FirstOrDefault(u => u.Question== question);
+        if( res != null){
+            return res;
+        }
+        return null;
+    }
 }

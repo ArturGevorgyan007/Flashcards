@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  </head>
+  <body>
+    <p style="background-image: url('/assets/background-map.png');"></p>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="randomCard()" style="margin: 2px;">
+      Random Flashcard
+    </button>
+    <!-- Button trigger table -->
+    <button type="button" class="btn btn-primary" (click)="showAllCards()" style="margin: 2px;">
+      Show All
+    </button>
+    <!-- Button trigger New FlashCard -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal" style="margin: 2px;">
+      New Flashcard
+    </button>
+
+
+    <!-- Button trigger table -->
+    <table *ngIf="showTable" class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Question</th>
+          <th scope="col">Answer</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let i of listCards">
+          <th scope="row">{{i.id}}</th>
+          <td>{{i.question}}</td>
+          <td>{{i.answer}}</td>
+          <td>
+            <img src="/assets/pencil-square.svg" alt="Bootstrap" width="24" height="24" data-bs-toggle="modal" data-bs-target="#editModal" (click)="getId($event)">
+            <img src="/assets/trash3.svg" alt="Bootstrap" width="24" height="24" (click)="deleteCard($event)">
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Random Flashcard Modal -->
+    <div *ngIf="randCard" class="modal fade flip-card" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered flip-card-inner" id="flip-card-inner">
+        <div class="modal-content flip-card-front" id="front">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Flashcard #{{randCard["id"]}}</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <h2>{{randCard["question"]}}</h2>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id= "flip-btn"  (click)="flip()">Show Answer</button>
+          </div>
+        </div>
+        <div class="modal-content flip-card-back" id="back">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Flashcard #{{randCard["id"]}}</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <h2 class="text-center">{{randCard["answer"]}}</h2>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary"  id= "flip-btn2" (click)="flip()">Show Question</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Edit Flashcard Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="editModalLabel">Edit Flashcard</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="question" class="form-label">Question</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" id="question" required>
+                </div>
+              <label for="answer" class="form-label">Answer</label>
+              <div class="input-group">
+                <input type="text" class="form-control" id="answer" required>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id= "update_btn" data-bs-dismiss="modal" (click)="editCard($event)">Update</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Create Flashcard Modal -->
+    <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="editModalLabel">New Flashcard</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="question" class="form-label">Question</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" id="addQuestion" required>
+                </div>
+              <label for="answer" class="form-label">Answer</label>
+              <div class="input-group">
+                <input type="text" class="form-control" id="addAnswer" required>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id= "update_btn" data-bs-dismiss="modal" (click)="addCard($event)">Create</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <script>     
+    </script>
+  </body>
+</html>
