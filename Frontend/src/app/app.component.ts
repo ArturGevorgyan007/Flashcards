@@ -4,6 +4,10 @@ import { FlashCardServiceService } from './flash-card-service.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Flashcard } from './Interfaces/Flashcard';
 import { OnInit } from '@angular/core';
+import * as $ from 'jquery';
+import 'jqueryui';
+import { AfterViewInit } from '@angular/core';
+import { AfterViewChecked } from '@angular/core';
 
 
 @Component({
@@ -11,7 +15,8 @@ import { OnInit } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+
+export class AppComponent implements AfterViewInit, AfterViewChecked{
   constructor(private http: HttpClient, private service: FlashCardServiceService, private formBuilder: FormBuilder) {}
   title = 'Frontend';
   clickCounter = 0;
@@ -21,9 +26,26 @@ export class AppComponent implements OnInit {
   closeWhat=""
   randCard : Flashcard ={id : 0,question :"", answer:""}
   validation : boolean = false
+  cardVisible : boolean = false
   
-  ngOnInit() {
-    this.getAllFlashcards()
+  
+  ngAfterViewInit() {
+    // var $: any;
+    this.getAllFlashcards();
+    // this.dragElement(document.getElementById("exampleModal") as HTMLElement);
+     $('.flashcard').draggable({
+      cursor: "move",
+      handle: ".card-header"
+    });
+    console.log("@@@");
+ 
+  }
+
+  ngAfterViewChecked() {
+    $('.flashcard').draggable({
+      cursor: "move",
+      handle: ".card-header"
+    });
   }
 
   flip() {
@@ -40,6 +62,11 @@ export class AppComponent implements OnInit {
     
   }
 
+  cardShowHide() {
+    this.cardVisible=!this.cardVisible
+    console.log(this.cardVisible)
+  }
+
   getRandomInt(max: number) {
     return Math.floor(Math.random() * max);
   }
@@ -48,6 +75,7 @@ export class AppComponent implements OnInit {
     if (this.clickCounter%2==1)
       this.flip()
     this.getAllFlashcards()
+    // Make the DIV element draggable:
   }
 
   showAllCards() {
