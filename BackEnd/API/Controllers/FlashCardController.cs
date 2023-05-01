@@ -56,6 +56,6 @@ public class FlashCardController : ControllerBase
     [Route("getId/{question}")]
     public int GetBusinessTypeByEmail(string question)
     {
-        return _service.GetById(question).Id;
+        return Int32.Parse(_service.GetById(question).Id);
     }
 }
