@@ -51,4 +51,11 @@ public class FlashCardController : ControllerBase
         {
             return _service.GetById(id);
         }
+
+    [HttpGet]
+    [Route("getId/{question}")]
+    public int GetBusinessTypeByEmail(string question)
+    {
+        return _service.GetById(question).Id;
+    }
 }
