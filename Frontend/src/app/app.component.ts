@@ -29,6 +29,7 @@ export class AppComponent implements OnInit, AfterViewChecked, AfterViewInit {
   validationError : string = ""
   
   ngOnInit() {
+    this.getAllFlashcards()
     setTimeout(function(){ 
       var addModalEl = document.getElementById('addModal')
           addModalEl!.addEventListener('hidden.bs.modal', function (event) {

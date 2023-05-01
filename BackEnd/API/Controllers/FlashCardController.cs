@@ -52,10 +52,10 @@ public class FlashCardController : ControllerBase
             return _service.GetById(id);
         }
 
-    [HttpGet]
-    [Route("getId/{question}")]
-    public int GetBusinessTypeByEmail(string question)
-    {
-        return Int32.Parse(_service.GetById(question).Id);
-    }
+    // [HttpGet]
+    // [Route("getId/{question}")]
+    // public int GetBusinessTypeByEmail(string question)
+    // {
+    //     return Int32.Parse(_service.GetById(question).Id);
+    // }
 }
