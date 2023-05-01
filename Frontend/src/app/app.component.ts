@@ -4,11 +4,9 @@ import { FlashCardServiceService } from './flash-card-service.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Flashcard } from './Interfaces/Flashcard';
 import { OnInit } from '@angular/core';
-import * as $ from 'jquery';
-import 'jqueryui';
 import { AfterViewInit } from '@angular/core';
 import { AfterViewChecked } from '@angular/core';
-import { TmplAstRecursiveVisitor } from '@angular/compiler';
+
 
 
 @Component({
